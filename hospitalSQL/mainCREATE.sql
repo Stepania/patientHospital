@@ -10,7 +10,6 @@ CREATE TABLE DEPARTMENT (
 );
 
 drop table DEPARTMENT;
-insert into DEPARTMENT values (123,'dssf' )
 
 select*from DEPARTMENT;
 
@@ -67,10 +66,10 @@ CREATE TABLE WAITLIST (
 	waitListNo varchar(7) NOT NULL,
 	addedDate date,
 	FSADate date,	
-
 	PRIMARY KEY (waitListNo),
 	patientNHI varchar(7) FOREIGN KEY REFERENCES PATIENT(patientNHI),
-	surgeonID int FOREIGN KEY REFERENCES SURGEON(surgeonID)
+	surgeonID int FOREIGN KEY REFERENCES SURGEON(surgeonID),
+	departmentID int FOREIGN KEY REFERENCES DEPARTMENT(departmentID)
 
 );
 
@@ -84,12 +83,15 @@ CREATE TABLE REFERRAL (
 	referenceCode int NOT NULL,
 	ReferralDate date,
 	HealthTarget varchar (3),
-	doctor varchar(25),	
+	referralType varchar(25),	
 	PRIMARY KEY (patientNHI),	
 	patientNHI varchar(7) FOREIGN KEY REFERENCES PATIENT(patientNHI),
 	doctorID int FOREIGN KEY REFERENCES DOCTOR(doctorID),
+	departmentID int NOT NULL FOREIGN KEY REFERENCES DEPARTMENT(departmentID),
+
 );
 
 drop table REFERRAL;
 
 select*from REFERRAL;
+
