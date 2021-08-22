@@ -1,4 +1,4 @@
-USE HOSPITAL;
+USE ARAHOSPITAL;
 GO
 --1 querry how many parients cardio....something
 SELECT COUNT(*) as refferedToCardio
@@ -23,3 +23,15 @@ GROUP BY departmentName
 ORDER BY departmentName
 
 DROP TABLE waitingTimeBeforeSeen
+
+
+
+/*ALTER TABLE [dbo].[REFERRAL] ADD [PatientAge] INT
+GO
+
+UPDATE [dbo].[REFERRAL]
+SET PatientAge = (DATEDIFF(DAY, patientDOB, ReferralDate) /365.25 )
+
+
+SELECT * FROM REFERRAL
+

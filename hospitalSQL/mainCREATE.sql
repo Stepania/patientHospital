@@ -1,10 +1,10 @@
-CREATE DATABASE HOSPITAL;
+CREATE DATABASE ARAHOSPITAL;
 GO
 
 drop database HOSPITAL
 
 CREATE TABLE DEPARTMENT (
-	departmentID int NOT NULL,
+	departmentID int,
 	departmentName varchar (50) NOT NULL,
 	PRIMARY KEY (departmentID)
 );
@@ -49,8 +49,7 @@ CREATE TABLE PATIENT (
 	PatientName varchar (50) NOT NULL,
 	PatientSurname varchar (50) NOT NULL,
 	Gender varchar (20),
-	DOB date,
-
+	patientDOB date,
 	PRIMARY KEY (patientNHI),
 	doctorID int FOREIGN KEY REFERENCES DOCTOR(doctorID)
 );
@@ -63,7 +62,7 @@ select*from PATIENT;
 
 
 CREATE TABLE WAITLIST (
-	waitListNo varchar(7) NOT NULL,
+	waitListNo int NOT NULL,
 	addedDate date,
 	FSADate date,	
 	PRIMARY KEY (waitListNo),
@@ -84,11 +83,11 @@ CREATE TABLE REFERRAL (
 	ReferralDate date,
 	HealthTarget varchar (3),
 	referralType varchar(25),	
-	PRIMARY KEY (patientNHI),	
+
+	PRIMARY KEY (referenceCode),	
 	patientNHI varchar(7) FOREIGN KEY REFERENCES PATIENT(patientNHI),
 	doctorID int FOREIGN KEY REFERENCES DOCTOR(doctorID),
-	departmentID int NOT NULL FOREIGN KEY REFERENCES DEPARTMENT(departmentID),
-
+	departmentID int NOT NULL FOREIGN KEY REFERENCES DEPARTMENT(departmentID),	
 );
 
 drop table REFERRAL;
