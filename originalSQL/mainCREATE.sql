@@ -68,8 +68,7 @@ CREATE TABLE WAITLIST (
 	PRIMARY KEY (waitListNo),
 	patientNHI varchar(7) FOREIGN KEY REFERENCES PATIENT(patientNHI),
 	surgeonID int FOREIGN KEY REFERENCES SURGEON(surgeonID),
-	departmentID int FOREIGN KEY REFERENCES DEPARTMENT(departmentID),
-	referenceCode int FOREIGN KEY REFERENCES REFERRAL(referenceCode)
+	departmentID int FOREIGN KEY REFERENCES DEPARTMENT(departmentID)
 
 );
 
@@ -95,23 +94,3 @@ drop table REFERRAL;
 
 select*from REFERRAL;
 
-
---creating added fields
-
-ALTER TABLE Referral ADD PatientAge INT
-
-UPDATE REFERRAL
-SET [PatientAge] = DATEDIFF(DAY,p.patientDOB,r.ReferralDate) /365.25
-FROM REFERRAL r
-JOIN PATIENT p ON r.patientNHI=p.patientNHI
-
-
-SELECT * FROM REFERRAL
-select * from WAITLIST
-
-ALTER TABLE REFERRAL ADD DaysWaiting INT
-
-UPDATE REFERRAL
-SET DaysWaiting = DATEDIFF(DAY,r.ReferralDate,w.FSADate)
-FROM REFERRAL p
-JOIN Referral r ON p.referralID = r.referralID

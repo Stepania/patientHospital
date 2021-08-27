@@ -1,4 +1,4 @@
-﻿patientNHI,PatientName,PatientSurname,Gender,DOB,Referred By
+﻿PatientNHI,PatientName,PatientSurname,Gender,DOB,DoctorID
 QDX4955,Spense,Pringuer,Male,1972-02-14,100
 ECP7715,Shirline,Van der Kruys,Female,1992-12-27,101
 ZIK8925,Chev,Eckels,Male,1951-04-19,102
