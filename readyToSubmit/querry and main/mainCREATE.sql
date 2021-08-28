@@ -1,7 +1,9 @@
-CREATE DATABASE ARAHOSPITAL;
+CREATE DATABASE HospitalARA;
 GO
 
-drop database HOSPITAL
+USE HospitalARA
+
+drop database HospitalARA
 
 CREATE TABLE DEPARTMENT (
 	DepartmentID int NOT NULL,
@@ -30,22 +32,22 @@ select*from DOCTOR;
 
 CREATE TABLE SURGEON (
 	SurgeonID int NOT NULL,
-	SurgeonName varchar (50) NOT NULL,
-	SurgeonSurname varchar (50) NOT NULL,
+	SurgeonName varchar (25) NOT NULL,
+	SurgeonSurname varchar (25) NOT NULL,
 	PRIMARY KEY (surgeonID),
-	departmentID int FOREIGN KEY REFERENCES DEPARTMENT(departmentID)
+	DepartmentID int FOREIGN KEY REFERENCES DEPARTMENT(DepartmentID)
 );
 
 drop table SURGEON;
 
 select*from SURGEON;
 
---PATIENt   
+--PATIENT   
 
 CREATE TABLE PATIENT (
 	PatientNHI varchar(7) NOT NULL,
-	PatientName varchar (50) NOT NULL,
-	PatientSurname varchar (50) NOT NULL,
+	PatientName varchar (25) NOT NULL,
+	PatientSurname varchar (25) NOT NULL,
 	Gender varchar (20) NOT NULL,
 	PatientDOB date NOT NULL,
 	PRIMARY KEY (PatientNHI),

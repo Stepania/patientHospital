@@ -1,4 +1,4 @@
-﻿Surgeon,SurgeonName,SurgeonSurname,DepartmentID
+﻿SurgeonID,SurgeonName,SurgeonSurname,DepartmentID
 11111,Simon,Frampton,1
 11112,Peri,Duffy,2
 11113,Steve,Renison,2

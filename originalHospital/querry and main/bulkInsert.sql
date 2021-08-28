@@ -43,6 +43,7 @@ bulk insert ARAHOSPITAL.[dbo].[PATIENT]
 		ROWTERMINATOR='\n',
 		FIRSTROW=2
 	)
+
 	select * from  [PATIENT]
 
 	bulk insert ARAHOSPITAL.[dbo].[REFERRAL]
@@ -55,5 +56,3 @@ bulk insert ARAHOSPITAL.[dbo].[PATIENT]
 	)
 
 select * from  [REFERRAL]
-drop
-

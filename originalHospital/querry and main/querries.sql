@@ -38,11 +38,12 @@ DATEDIFF(day, r.[ReferralDate], r.[FSADate]) AS 'Days Waiting'
 FROM [dbo].[REFERRAL] r
 INNER JOIN [dbo].[Patient] p ON p.[PatientNHI] = r.[PatientNHI]
 INNER JOIN [dbo].[SURGEON] s ON s.[SurgeonID] = r.[SurgeonID]
+WHERE r.[FSADate] IS NOT NULL
 ORDER BY s.SurgeonName ASC
 
 
 -- 4. Assuming that all patients under 18 need to be seen by Paediatric Surgery, are there any patients who need to be reassigned? 
-SELECT p.[PatientNHI] AS 'Patient NHI',CONCAT(p.[PatientName], ' ', p.[PatientSurname]) AS 'Patient Name',CAST(DATEDIFF(DAY,p.[PatientDOB],r.[ReferralDate]) /365.25 AS INT) AS 'Patient Age',d.[DepartmentName] AS 'Department Name'FROM [dbo].[REFERRAL]  rINNER JOIN [dbo].[PATIENT] p ON p.[PatientNHI]=r.[PatientNHI]INNER JOIN [dbo].[DEPARTMENT] d ON r.[DepartmentID]=d.[DepartmentID]WHERE CAST(DATEDIFF(DAY,p.[PatientDOB],r.[ReferralDate]) /365.25 AS INT) < 18 AND r.[HealthTarget] = 'yes'AND d.[DepartmentName] !='Paediatric Surgery'
+SELECT p.[PatientNHI] AS 'Patient NHI',CONCAT(p.[PatientName], ' ', p.[PatientSurname]) AS 'Patient Name',CAST(DATEDIFF(DAY,p.[PatientDOB],r.[ReferralDate]) /365.25 AS INT) AS 'Patient Age',d.[DepartmentName] AS 'Department Name'FROM [dbo].[REFERRAL]  rINNER JOIN [dbo].[PATIENT] p ON p.[PatientNHI]=r.[PatientNHI]INNER JOIN [dbo].[DEPARTMENT] d ON r.[DepartmentID]=d.[DepartmentID]WHERE CAST(DATEDIFF(DAY,p.[PatientDOB],r.[ReferralDate]) /365.25 AS INT) < 18 andp.[PatientNHI] != 'YBB1095'-- wrong DOB that's why she has been terminated AND r.[HealthTarget] = 'yes'AND d.[DepartmentName] !='Paediatric Surgery'
 
 select * from PATIENT
 where PatientName = 'Carlye'
