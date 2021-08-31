@@ -18,12 +18,12 @@ INNER JOIN [dbo].[PATIENT]p ON r.[PatientNHI]=p.[PatientNHI]
 WHERE r.[HealthTarget] like 'Y%' and
 p.[PatientNHI] != 'YBB1095'-- wrong DOB that's why she has been terminated 
 
--- 1.How many people have been referred for cardiothoracic?
+-- 1. referred for cardiothoracic?
 SELECT COUNT(r.[DepartmentID]) AS 'Referred to Cardiothoracic'
 FROM [dbo].[REFERRAL] r
 WHERE r.[DepartmentID] = 2 AND r.[HealthTarget] like 'Y%'
 
--- 2. What is the average time taken (in days) to see a Surgeon by Department?
+-- 2. average time taken (in days) to see a Surgeon by Department?
 --ordered
 SELECT d.[DepartmentName] AS 'Department', r.[PatientNHI], DATEDIFF(day, r.[ReferralDate], r.[FSADate]) AS 'Days Waiting'
 FROM [dbo].[Department] d
@@ -41,6 +41,12 @@ INNER JOIN [dbo].[Patient] p ON p.[PatientNHI] = r.[PatientNHI]
 INNER JOIN [dbo].[SURGEON] s ON s.[SurgeonID] = r.[SurgeonID]
 WHERE r.[FSADate] IS NOT NULL
 ORDER BY s.SurgeonName ASC
+
+SELECT r.[ReferralDate],p.[PatientNHI]
+FROM REFERRAL r
+right JOIN PATIENT p
+ON r.[PatientNHI] = p.[PatientNHI]
+WHERE [ReferralDate] = '2015-07-01'
 
 
 -- 4. Assuming that all patients under 18 need to be seen by Paediatric Surgery, are there any patients who need to be reassigned? 
@@ -60,10 +66,10 @@ AND d.[DepartmentName] !='Paediatric Surgery'
 
 -- 5.What percentage of patient were seen within the target of 75 days by department?
 SELECT d.[DepartmentName] AS 'Department Name',
-CAST(CAST(m.MetCount AS DECIMAL) / CAST(p.NoPatient AS DECIMAL) *100 AS DECIMAL) AS 'Percentage Met'
+CAST(CAST(m.MetCriteria AS DECIMAL) / CAST(p.NoPatient AS DECIMAL) *100 AS DECIMAL) AS 'Percentage'
 FROM
 (
-	SELECT r.[DepartmentID], COUNT(*) AS MetCount 
+	SELECT r.[DepartmentID], COUNT(*) AS MetCriteria 
 	FROM  [dbo].[REFERRAL] r
 	WHERE DATEDIFF(DAY,r.[ReferralDate],r.[FSADate]) < 76
 	GROUP BY r.[DepartmentID]
