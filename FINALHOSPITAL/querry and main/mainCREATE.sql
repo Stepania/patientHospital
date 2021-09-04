@@ -19,7 +19,7 @@ select*from DEPARTMENT;
 
 CREATE TABLE DOCTOR (
 	DoctorID int NOT NULL,
-	DoctorName varchar (50) NOT NULL,	
+	DoctorName varchar (25) NOT NULL,	
 	DoctorType varchar (25) NOT NULL,
 	PRIMARY KEY (DoctorID)
 );
